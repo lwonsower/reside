@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
 
-export default class Question extends Component {
+export default class Answer extends Component {
 	constructor(props) {
     super(props);
     
-    this.splitQuestion = this.splitQuestion.bind(this);
+    this.splitAnswer = this.splitAnswer.bind(this);
 	};
 
-  splitQuestion(str, min, max, ideal) {
+  splitAnswer(str, min, max, ideal) {
 
   };
 
   render(){
   	return(
-      <div className="question">
+      <div className="answer-div">
         <div className="left-q">
-          {this.props.ask}
+          {this.props.resp}
         </div>
 
         <div className="right-q">

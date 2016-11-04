@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import Question from './Question.jsx';
+import Answer from './Answer.jsx';
 import Footer from './Footer.jsx';
 
 export default class Main extends Component {
@@ -8,35 +8,35 @@ export default class Main extends Component {
 		super(props);
 		this.state = {
 			value: '',
-      ask: '',
+      resp: '',
 		};
 
 		this.handleChange = this.handleChange.bind(this);
-		this.submitQuestion = this.submitQuestion.bind(this);
+		this.submitAnswer = this.submitAnswer.bind(this);
 	}
 
 	handleChange(event) {
 		this.setState({value: event.target.value})
 	};
 
-	submitQuestion(event) {
-		console.log(this.state.ask)
+	submitAnswer(event) {
+		console.log(this.state.resp)
 		event.preventDefault();
-    this.setState({ask: this.state.value})
+    this.setState({resp: this.state.value})
 	};
 
 	render() {
 		return(
       <div>
-        <h1 className="title">ASK JELLY</h1>
+        <h1 className="title">ANSWER JELLY</h1>
         <div className="input-form">
         		<input 	type="text"
-        						placeholder="Ask away!"
+        						placeholder="Answer away!"
         						onChange={this.handleChange}
         						 />
-        		<submit onClick={this.submitQuestion}>ASK</submit>
+        		<submit onClick={this.submitAnswer}>Answer</submit>
         </div>
-        	{this.state.ask ? <Question ask={this.state.ask} /> : false }
+        	{this.state.resp ? <Answer resp={this.state.resp} /> : false }
         <Footer />
       </div>
 		)
