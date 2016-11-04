@@ -1,3 +1,74 @@
+$jellygreen: #01c3a7;
+$darkgrey: #616d71;
+$lightgrey: #c0c7ce;
+
 body {
 	font-family: Helvetica;
+	color: $darkgrey;
 }
+
+//Styles for Main component
+
+.title {
+	background: $jellygreen;
+	color: #FFF;
+	padding: 1em 0.5em;
+	width: 6em;
+	text-align: center;
+  margin: auto;
+}
+
+.input-form {
+	text-align: center;
+	margin: 3em 0;
+}
+
+input {
+	color: $darkgrey;
+	// background: $lightgrey;
+	border-radius: 5px 0 0 5px;
+	width: 10em;
+	font-size: 1.30em;
+	outline: none;
+	padding: 0.2em;
+}
+
+submit {
+  background: $jellygreen;
+  border-radius: 0 5px 5px 0;
+  border-top: $jellygreen 3px solid;
+  color: #FFF;
+  font-size: 1.30em;
+  padding: 0.2em;
+}
+
+//Styles for Question component
+
+.question {
+	margin: 3em auto 0 auto;
+	align: center;
+	border-top: $jellygreen 3px solid;
+	width: 23em;
+}
+
+.left-q {
+	width: 50%;
+	float: left;
+}
+
+.right-q {
+	width: 50%;
+	float: right;
+}
+
+
+//Styles for Footer component
+.footer { 
+	  background: $lightgrey;
+    position: absolute; 
+    left: 0 ; right: 0; bottom: 0; 
+    height: 2em;
+    padding-top: 1em;
+    text-align: center;
+}
+
