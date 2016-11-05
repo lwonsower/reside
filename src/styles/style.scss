@@ -15,7 +15,7 @@ body {
 	padding: 1em 0.5em;
 	width: 6em;
 	text-align: center;
-  margin: auto;
+  margin: 1em auto 0 auto;
 }
 
 .input-form {
@@ -36,7 +36,7 @@ input {
 submit {
   background: $jellygreen;
   border-radius: 0 5px 5px 0;
-  border-top: $jellygreen 3px solid;
+  border: $jellygreen 3px solid;
   color: #FFF;
   font-size: 1.30em;
   padding: 0.2em;
@@ -48,19 +48,30 @@ submit {
 	margin: 3em auto 0 auto;
 	align: center;
 	border-top: $jellygreen 3px solid;
-	width: 23em;
+	width: 50em;
+	.left-q {
+	  width: 50%;
+	  float: left;
+	  h4 {
+	  	text-align: center;
+	  }
+  }
+  .right-q {
+	  width: 50%;
+	  float: right;
+	  h4 {
+	  	text-align: center;
+	  }
+  }
 }
 
-.left-q {
-	width: 50%;
-	float: left;
+.drop-down {
+  text-align: center;
+  list-style: none;
+  font-size: 1.30em;
+  color: $darkgrey;
+  text-decoration: none;
 }
-
-.right-q {
-	width: 50%;
-	float: right;
-}
-
 
 //Styles for Footer component
 .footer { 
@@ -68,7 +79,7 @@ submit {
     position: absolute; 
     left: 0 ; right: 0; bottom: 0; 
     height: 2em;
-    padding-top: 1em;
+    padding: 2em;
     text-align: center;
 }
 
