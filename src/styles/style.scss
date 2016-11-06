@@ -65,12 +65,23 @@ submit {
   }
 }
 
+
+//Styles for dropdown
 .drop-down {
   text-align: center;
   list-style: none;
   font-size: 1.30em;
   color: $darkgrey;
   text-decoration: none;
+}
+
+//Styles for snippet & continued
+.snippet {
+	padding-right: 0.25em;
+}
+
+.continued {
+	padding-left: 0.25em;
 }
 
 //Styles for Footer component
