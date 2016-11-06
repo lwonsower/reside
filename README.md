@@ -7,6 +7,7 @@ A simple React app for splitting strings in an effective & logical manner.
 - React
 - Sass
 
+## Run
 To run Answer Jelly please
 
 ```
