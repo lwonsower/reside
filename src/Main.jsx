@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 import Answer from './Answer.jsx';
-import Footer from './Footer.jsx';
 
 export default class Main extends Component {
 	constructor(props) {
