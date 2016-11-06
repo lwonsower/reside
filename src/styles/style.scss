@@ -18,6 +18,14 @@ body {
   margin: 1em auto 0 auto;
 }
 
+.signature {
+	color: $jellygreen;
+	opacity: 0.6;
+	text-align: center;
+	font-weight: bold;
+	font-style: italic;
+}
+
 .input-form {
 	text-align: center;
 	margin: 3em 0;
@@ -79,21 +87,11 @@ submit {
 .snippet {
 	padding-right: 0.4em;
 	word-wrap: break-word; 
+	margin-bottom: 1em;
 }
 
 .continued {
 	padding-left: 0.4em;
 	word-wrap: break-word; 
+	margin-bottom: 1em;
 }
-
-//Styles for Footer component
-.footer { 
-	  background: $lightgrey;
-    position: absolute; 
-    margin-top: 90%;
-    left: 0 ; right: 0; bottom: 0; 
-    height: 2em;
-    padding: 2em;
-    text-align: center;
-}
-

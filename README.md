@@ -6,7 +6,8 @@ To run Answer Jelly please
 ```
 npm install
 ```
-& then
+then
 ```
 node index.js
 ```
+Enjoy splitting your answers at http://localhost:3000/

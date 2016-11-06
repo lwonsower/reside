@@ -57,7 +57,7 @@ export default class Answer extends Component {
     for (var j=0; j<pieces.length; j++){
       let range = Math.abs(output.snippet.length - ideal);
       let iteration = output.snippet += pieces[j];
-      if ((range > iteration.length && iteration.length <= max) || (iteration.length < min && iteration.length <= max)) {
+      if (range > iteration.length || iteration.length < min) {
         output.snippet = iteration;
       } else {
         output.continued = pieces.join('').slice(output.snippet.length);
@@ -65,6 +65,17 @@ export default class Answer extends Component {
           output.snippet += '...';
         }
         break;
+      }
+    }
+    
+    //Final edge case check for long strings. The snippet is sliced by the space nearest to ideal.
+    if (output.snippet.length > max) {
+      for (var k=ideal; k<output.snippet.length; k++){
+        if (output.snippet[k] === ' ') {
+          let temp = output.snippet.slice(k);
+          output.snippet = output.snippet.slice(0, k) + '...';
+          output.continued = temp += output.continued;
+        }
       }
     }
 

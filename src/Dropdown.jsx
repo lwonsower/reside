@@ -16,7 +16,7 @@ export default class Dropdown extends Component {
 		//Callback pattern for adjusting Answer split via dropdown menu
 		return (
       <div className="drop-down">
-        <DropdownButton title="OPTIMISE" id="nav-dropdown">
+        <DropdownButton title="FORMAT" id="nav-dropdown">
           <MenuItem className="menu-item" onClick={() => {
             this.changeAnswerSplit(20, 50, 25);	
           }}>Email Subject</MenuItem>

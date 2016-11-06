@@ -27,8 +27,9 @@ export default class Main extends Component {
 
 	render() {
 		return(
-      <div>
+      <div className="main-div">
         <h1 className="title">ANSWER JELLY</h1>
+        <h4 className="signature">By Lucy Wonsower</h4>
         <div className="input-form">
         		<input 	type="text"
         						placeholder="Answer away!"
@@ -37,7 +38,6 @@ export default class Main extends Component {
         		<submit onClick={this.submitAnswer}>Answer</submit>
         </div>
         	{this.state.resp ? <Answer resp={this.state.resp} /> : false }
-        <Footer />
       </div>
 		)
 	};
