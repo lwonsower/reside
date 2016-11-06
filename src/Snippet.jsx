@@ -5,6 +5,7 @@ export default class Snippet extends Component {
 		return (
       <div className="snippet">
         {this.props.snippet}
+        {this.props.snippet.length}
       </div>
 		)
 	};

@@ -77,17 +77,20 @@ submit {
 
 //Styles for snippet & continued
 .snippet {
-	padding-right: 0.25em;
+	padding-right: 0.4em;
+	word-wrap: break-word; 
 }
 
 .continued {
-	padding-left: 0.25em;
+	padding-left: 0.4em;
+	word-wrap: break-word; 
 }
 
 //Styles for Footer component
 .footer { 
 	  background: $lightgrey;
     position: absolute; 
+    margin-top: 90%;
     left: 0 ; right: 0; bottom: 0; 
     height: 2em;
     padding: 2em;

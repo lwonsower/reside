@@ -16,29 +16,58 @@ export default class Answer extends Component {
     this.splitAnswer = this.splitAnswer.bind(this);
 	};
   
+  //splitAnswer contains all of the string splitting logic
+
   splitAnswer(str, min, max, ideal) {
-    console.log("inside split answers")
     const output = { snippet: '', continued: '' };
-    // str.length < min ? alert("Answer must be at least "+min+" characters!") : null;
-    str = str.split(/([.!:?;])/);
-    //For answers lacking punctuation and low character maximums
-    if (str.length === 1 || str[0].length > max) {
-      str = str.join('').split(/(\s)/);
-      //Edge case for an 'answer' that is just a string of letters.
-      if (str.length === 1) {
-        return str.join('').slice(0, min-3) + '...';
+    let pieces = '';
+    let punctuation = ['.','?','!',':',';',','];
+
+    //Notify user if their answer does not meet the minimum length for selected format
+    if (str.length < min) {
+      return this.setState({ 
+        snippet: 'Answer not long enough for this format!', 
+        continued: 'Please elaborate...',
+      });
+    }
+
+    //Loop through the string, adding breakpoints after punctuation. This way we can split the string into an array of strings while maintaining appropriate punctuation
+    for (var i=0; i<str.length; i++){
+      pieces += str[i];
+      if (punctuation.includes(str[i])) {
+        pieces += '\n'
       }
     }
-    for (var i=0; i<str.length; i++){
-        let range = Math.abs(output.snippet.length - ideal);
-        let iteration = output.snippet += str[i];
-      if (range > iteration.length || iteration.length < min) {
+    
+    pieces = pieces.split('\n');
+
+    //Edge case for answers lacking punctuation and low character maximums
+    if (pieces.length === 1 || pieces[0].length > max) {
+      pieces = pieces.join('').split(/(\s)/);
+      //Edge case for an 'answer' that is just a string of letters.
+      if (pieces.length === 1) {
+        return this.setState({ 
+          snippet: str.join('').slice(0, ideal) + '...', 
+          continued: str.join('').slice(ideal+1),
+        });
+      }
+    }
+
+    //Loop through pieces array, main logic for generating snippet of appropriate length
+    for (var j=0; j<pieces.length; j++){
+      let range = Math.abs(output.snippet.length - ideal);
+      let iteration = output.snippet += pieces[j];
+      if ((range > iteration.length && iteration.length <= max) || (iteration.length < min && iteration.length <= max)) {
         output.snippet = iteration;
       } else {
-        output.continued = str.join('').slice(output.snippet.length);
+        output.continued = pieces.join('').slice(output.snippet.length);
+        if (!punctuation.includes(output.snippet[output.snippet.length-1])) {
+          output.snippet += '...';
+        }
         break;
       }
-    }    
+    }
+
     this.setState({ snippet: output.snippet, continued: output.continued });
   };
 
