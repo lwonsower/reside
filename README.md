@@ -1,14 +1,15 @@
-# Answer Jelly
-A simple React app for splitting strings in an effective & logical manner. 
+# House Glimpse
+A simple React app for viewing information about real estate listings via SimplyRets.
 
 ## Stack
 - Node/Express
 - Webpack
 - React
 - Sass
+- Firebase
 
 ## Run
-To run Answer Jelly please
+To run House Glimpse please
 
 ```
 npm install
@@ -17,4 +18,4 @@ then
 ```
 node index.js
 ```
-& enjoy splitting your answers at localhost:3000
+& enjoy glimpsing listings at localhost:3000

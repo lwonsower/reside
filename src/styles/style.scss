@@ -1,97 +1,131 @@
-$jellygreen: #01c3a7;
-$darkgrey: #616d71;
-$lightgrey: #c0c7ce;
+$residegrey: #656e70;
+$white: #fff;
 
 body {
 	font-family: Helvetica;
-	color: $darkgrey;
+	color: $residegrey;
 }
 
 //Styles for Main component
 
+.row {
+	display: flex;
+	flex-direction: row;
+}
+
+.column {
+	display: flex;
+	flex-direction: column;
+}
+
+.home-body {
+	background-image: url("../images/bernal.jpg");
+	background-size: cover;
+	color: $white;
+	width: "100%";
+	height: 600px;
+	padding: 0px;
+	align-items: center;
+	justify-content: center;
+
+	.home-details {
+		height: 300px;
+		width: 50%;
+		background: $white;
+		color: $residegrey;
+		padding: 25px;
+		border-radius: 4px;
+		align-items: center;
+		justify-content: center;
+
+		.home-title {
+			font-size: 36px;
+			padding-bottom: 25px;
+		}
+
+		#member-id-form:focus {
+			outline: 0;
+		}
+	}
+}
+
 .title {
-	background: $jellygreen;
-	color: #FFF;
-	padding: 1em 0.5em;
-	width: 6em;
-	text-align: center;
-  margin: 1em auto 0 auto;
+	color: $residegrey;
+	text-transform: uppercase;
+	font-weight: bold;
+	padding: 10px;
 }
 
 .signature {
-	color: $jellygreen;
-	opacity: 0.6;
-	text-align: center;
-	font-weight: bold;
-	font-style: italic;
+	padding-left: 10px;
 }
 
-.input-form {
-	text-align: center;
-	margin: 3em 0;
+.listing-map {
+	align-items: center;
+	justify-content: center;
+	display: flex;
+	flex-direction: row;
 }
 
-input {
-	color: $darkgrey;
-	// background: $lightgrey;
-	border-radius: 5px 0 0 5px;
-	width: 10em;
-	font-size: 1.30em;
-	outline: none;
-	padding: 0.2em;
+//Styles for listing
+.all-listings {
+	align-items: center;
+	justify-content: center;
+
+	.all-listings-info {
+		align-self: flex-start;
+		padding-left: 10px;
+
+		.buttons {
+			border: solid 1px $residegrey;
+			cursor: pointer;
+			padding: 5px;
+			margin-left: 10px;
+			border-radius: 4px;
+			text-transform: uppercase;
+		}
+	}
 }
 
-submit {
-  background: $jellygreen;
-  border-radius: 0 5px 5px 0;
-  border: $jellygreen 3px solid;
-  color: #FFF;
-  font-size: 1.30em;
-  padding: 0.2em;
-}
+.listing-root {
+	height: 200px;
+	width: 80%;
+	padding: 10px;
+	margin: 10px;
+	align-items: center;
+	justify-content: center;
+	color: rgba(101, 110, 112, 0.8);
 
-//Styles for Answer component
+	.listing-inner {
+		background: rgba(255, 255, 255, 0.8);
+		height: 100%;
+		width: 100%;
 
-.answer-div {
-	margin: 3em auto 0 auto;
-	align: center;
-	border-top: $jellygreen 3px solid;
-	width: 50em;
-	.left-q {
-	  width: 50%;
-	  float: left;
-	  h4 {
-	  	text-align: center;
-	  }
-  }
-  .right-q {
-	  width: 50%;
-	  float: right;
-	  h4 {
-	  	text-align: center;
-	  }
-  }
-}
+		.address {
+			font-size: 20px;
+			font-weight: bold;
+			width: 33%;
+			border-right: solid 1px $white;
+			padding: 5px;
+			justify-content: space-between;
 
+			.maps-icon {
+				height: 50px;
+				width: 50px;
+				opacity: 0.7;
+			}
+		}
 
-//Styles for dropdown
-.drop-down {
-  text-align: center;
-  list-style: none;
-  font-size: 1.30em;
-  color: $darkgrey;
-  text-decoration: none;
-}
+		.details {
+			width: 62%;
+			padding: 5px;
+		}
 
-//Styles for snippet & continued
-.snippet {
-	padding-right: 0.4em;
-	word-wrap: break-word; 
-	margin-bottom: 1em;
-}
-
-.continued {
-	padding-left: 0.4em;
-	word-wrap: break-word; 
-	margin-bottom: 1em;
+		.star {
+			color: $white;
+			font-size: 36px;
+			cursor: pointer;
+			height: 36px;
+		}
+	}
 }
