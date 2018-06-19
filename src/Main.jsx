@@ -95,11 +95,14 @@ export default class Main extends Component {
         }
       }).then(() => {
         if (this.state.starredListings.includes(listingId)) {
+          /* If the listing is already starred, it is removed from the ref and starredListings in state is saved
+          as an updated list where the listing id has been spliced out */
           const index = updatedStarredListings.indexOf(listingId);
           updatedStarredListings.splice(index, 1);
 
           ref.child(listingKey).remove();
         } else {
+          // If the listing is not starred, the id is pushed into our listings array which is then saved to state & added to the ref
           updatedStarredListings.push(listingId);
 
           ref.push({
