@@ -64,7 +64,7 @@ export default class Main extends Component {
       } else {
         // A new ref is created with the name and userId
         ref.push({
-	        userId,
+          userId,
         });
       }
       // The userId is saved to browser localstorage
