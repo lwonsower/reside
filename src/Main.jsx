@@ -86,7 +86,7 @@ export default class Main extends Component {
       ref.once("value", snapshot => {
         let data = snapshot.val();
 
-	      if (snapshot.exists()) {
+        if (snapshot.exists()) {
           for (let key in data) {
             if (data[key]["starredListing"] === listingId) {
               listingKey = key;
@@ -159,8 +159,8 @@ export default class Main extends Component {
             <div className="buttons" onClick={() => this.setState({ filterFavorites: false })}>view all</div>
             <div className="buttons" onClick={() => this.setState({ filterFavorites: true })}>favorites</div>
             <div
-							className="buttons"
-							onClick={() => (
+              className="buttons"
+              onClick={() => (
                 this.setState({
                   filterFavorites: false,
                   starredListings: [],
@@ -170,7 +170,7 @@ export default class Main extends Component {
                   window.localStorage.removeItem("userId")
                 })
               )}
-						>
+            >
               log out
             </div>
           </div>
