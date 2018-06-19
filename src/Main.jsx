@@ -8,8 +8,8 @@ import Listing from "./Listing";
 firebase.initializeApp(firebaseConfig);
 
 export default class Main extends Component {
-	constructor(props) {
-		super(props);
+  constructor(props) {
+    super(props);
 		this.state = this.getInitialState();
 
 		this.startSession = this.startSession.bind(this);
