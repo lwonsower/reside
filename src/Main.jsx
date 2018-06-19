@@ -41,25 +41,34 @@ export default class Main extends Component {
 		})
 	};
 
-	startSession(name) {
-		const ref = firebase.database().ref(name);
-		const userId = Math.floor(Math.random() * 1000000);
-		window.localStorage.setItem("userId", userId);
+  startSession(name) {
+    const ref = firebase.database().ref(name);
+
+		// A new userId is a random six digit number
+		let userId = Math.floor(Math.random() * 1000000);
 
 		ref.once("value", snapshot => {
 			const data = snapshot.val();
 			const starredListings = [];
 
 			if (snapshot.exists()) {
-				console.log(ref.child("userId"));
 				for (let key in data) {
-					starredListings.push(data[key]["starredListing"])
+					if (data[key]["userId"]) {
+						// If a user already exists, their userId replaces the random number
+						userId = data[key]["userId"];
+					} else {
+						// The user's "starred" listings are added to state for easy manipulation
+						starredListings.push(data[key]["starredListing"]);
+					}
 				}
 			} else {
+				// A new ref is created with the name and userId
 				ref.push({
 					userId,
 				});
 			}
+      // The userId is saved to browser localstorage
+      window.localStorage.setItem("userId", userId);
 
 			return this.setState({
 				starredListings,
@@ -124,14 +133,21 @@ export default class Main extends Component {
 				<div className="home-details column">
 					<div className="home-title">Welcome to Hausblick.</div>
 					Please enter your name to restore an old session or create a new one.
-					<form id="member-id-form">
+					{/* I realize this app has absolutely no security, but I figured the damage done would be minimal with this apps limited use. ¯\_(ツ)_/¯ */}
+					<form id="member-id-form" onSubmit={event => event.preventDefault()}>
 						<input
 							type="text"
 							placeholder="Enter your name"
 							id="member-id-form"
 							onChange={event => this.setState({username: event.target.value})}
 						/>
-					<input type="button" id="member-id-form" onClick={() => this.startSession(username)} value="Go" disabled={username.length <= 0}/>
+						<input
+							disabled={username.length <= 0}
+							id="member-id-form"
+							onClick={() => this.startSession(username)}
+							type="button"
+							value="Go"
+						/>
 					</form>
 				</div>
 			</div>
@@ -148,6 +164,8 @@ export default class Main extends Component {
 									starredListings: [],
 									username: "",
 									view: "home",
+								}, () => {
+									window.localStorage.removeItem("userId")
 								})
 						)}>
 						  log out

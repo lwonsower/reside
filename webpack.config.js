@@ -14,13 +14,13 @@ module.exports = {
   },
 
   module: {
-  	loaders: [
-  		{
-  			test: [/\.js$/, /\.jsx$/],
-  			loaders: ['babel'],
-  			include: path.join(__dirname, 'src'),
-  		},
-  		{
+    loaders: [
+      {
+        test: [/\.js$/, /\.jsx$/],
+        loaders: ['babel'],
+        include: path.join(__dirname, 'src'),
+      },
+      {
         test: /\.scss$/,
         loaders: ["style", "css", "sass"],
       },
