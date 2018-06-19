@@ -16,6 +16,6 @@ npm install
 ```
 then
 ```
-node index.js
+npm run start
 ```
 & enjoy glimpsing listings at localhost:3000
