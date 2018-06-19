@@ -1,4 +1,4 @@
-# House Glimpse
+# Hausblick
 A simple React app for viewing information about real estate listings via SimplyRets.
 
 ## Stack
@@ -9,7 +9,7 @@ A simple React app for viewing information about real estate listings via Simply
 - Firebase
 
 ## Run
-To run House Glimpse please
+To run Hausblick please
 
 ```
 npm install
