@@ -82,112 +82,115 @@ export default class Main extends Component {
     const ref = firebase.database().ref(`${this.state.username}`);
     let listingKey;
 
-		new Promise(() => {
-			ref.once("value", snapshot => {
-				let data = snapshot.val();
+    new Promise(() => {
+      ref.once("value", snapshot => {
+        let data = snapshot.val();
 
-				if (snapshot.exists()) {
-					for (let key in data) {
-						if (data[key]["starredListing"] === listingId) {
-							listingKey = key;
-						}
-					}
-				}
-			}).then(() => {
-				if (this.state.starredListings.includes(listingId)) {
-					const index = updatedStarredListings.indexOf(listingId);
-					updatedStarredListings.splice(index, 1);
+	      if (snapshot.exists()) {
+          for (let key in data) {
+            if (data[key]["starredListing"] === listingId) {
+              listingKey = key;
+            }
+          }
+        }
+      }).then(() => {
+        if (this.state.starredListings.includes(listingId)) {
+          const index = updatedStarredListings.indexOf(listingId);
+          updatedStarredListings.splice(index, 1);
 
-					ref.child(listingKey).remove();
-				} else {
-					updatedStarredListings.push(listingId);
+          ref.child(listingKey).remove();
+        } else {
+          updatedStarredListings.push(listingId);
 
-					ref.push({
-						starredListing: listingId,
-					});
-				}
-				return this.setState({
-					starredListings: updatedStarredListings,
-				});
-			});
-		});
-	};
+          ref.push({
+            starredListing: listingId,
+          });
+       }
+        return this.setState({
+          starredListings: updatedStarredListings,
+        });
+      });
+    });
+  };
 
-	render() {
-		const {
-			housing,
-			filterFavorites,
-			starredListings,
-			username,
-			view,
-		} = this.state;
+  render() {
+    const {
+      housing,
+      filterFavorites,
+      starredListings,
+      username,
+      view,
+    } = this.state;
 
-		const filteredFavorites = filterFavorites ? (
-			housing.filter(property => starredListings.includes(property.listing.mlsId))
-		) : (
-			housing
-		);
+    const filteredFavorites = filterFavorites ? (
+      housing.filter(property => starredListings.includes(property.listing.mlsId))
+    ) : (
+      housing
+    );
 
-		const body = view === "home" ? (
-			<div className="home-body column">
-				<div className="home-details column">
-					<div className="home-title">Welcome to Hausblick.</div>
-					Please enter your name to restore an old session or create a new one.
-					{/* I realize this app has absolutely no security, but I figured the damage done would be minimal with this apps limited use. ¯\_(ツ)_/¯ */}
-					<form id="member-id-form" onSubmit={event => event.preventDefault()}>
-						<input
-							type="text"
-							placeholder="Enter your name"
-							id="member-id-form"
-							onChange={event => this.setState({username: event.target.value})}
-						/>
-						<input
-							disabled={username.length <= 0}
-							id="member-id-form"
-							onClick={() => this.startSession(username)}
-							type="button"
-							value="Go"
-						/>
-					</form>
-				</div>
-			</div>
-		) : (
-			<div className="all-listings column">
-				<div className="all-listings-info">
-					<div>Click the star to save a listing to your favorites.</div>
-					<div className="row">
-						<div className="buttons" onClick={() => this.setState({ filterFavorites: false })}>view all</div>
-						<div className="buttons" onClick={() => this.setState({ filterFavorites: true })}>favorites</div>
-						<div className="buttons" onClick={() => (
-								this.setState({
-									filterFavorites: false,
-									starredListings: [],
-									username: "",
-									view: "home",
-								}, () => {
-									window.localStorage.removeItem("userId")
-								})
-						)}>
-						  log out
-					  </div>
-					</div>
-				</div>
-				{filteredFavorites.map(property => (
-					<Listing
-						key={property.listing.mlsId}
-						listing={property.listing}
-						onStar={() => this.toggleStar(property.listing.mlsId)}
-						starred={starredListings.includes(property.listing.mlsId)}
-					/>
-			))}
-			</div>
-		);
+    const body = view === "home" ? (
+      <div className="home-body column">
+        <div className="home-details column">
+          <div className="home-title">Welcome to Hausblick.</div>
+          Please enter your name to restore an old session or create a new one.
+          {/* I realize this app has absolutely no security, but I figured the damage done would be minimal with this apps limited use. ¯\_(ツ)_/¯ */}
+          <form id="member-id-form" onSubmit={event => event.preventDefault()}>
+            <input
+              type="text"
+              placeholder="Enter your name"
+              id="member-id-form"
+              onChange={event => this.setState({username: event.target.value})}
+            />
+            <input
+              disabled={username.length <= 0}
+              id="member-id-form"
+              onClick={() => this.startSession(username)}
+              type="button"
+              value="Go"
+            />
+          </form>
+        </div>
+      </div>
+    ) : (
+      <div className="all-listings column">
+        <div className="all-listings-info">
+          <div>Click the star to save a listing to your favorites.</div>
+          <div className="row">
+            <div className="buttons" onClick={() => this.setState({ filterFavorites: false })}>view all</div>
+            <div className="buttons" onClick={() => this.setState({ filterFavorites: true })}>favorites</div>
+            <div
+							className="buttons"
+							onClick={() => (
+                this.setState({
+                  filterFavorites: false,
+                  starredListings: [],
+                  username: "",
+                  view: "home",
+                }, () => {
+                  window.localStorage.removeItem("userId")
+                })
+              )}
+						>
+              log out
+            </div>
+          </div>
+        </div>
+        {filteredFavorites.map(property => (
+          <Listing
+            key={property.listing.mlsId}
+            listing={property.listing}
+            onStar={() => this.toggleStar(property.listing.mlsId)}
+            starred={starredListings.includes(property.listing.mlsId)}
+          />
+      ))}
+      </div>
+    );
 
-		return (
-			<div className="main-div">
-				<h1 className="title">Hausblick</h1>
-				{body}
-			</div>
-		);
-	};
+    return (
+      <div className="main-div">
+        <h1 className="title">Hausblick</h1>
+        {body}
+      </div>
+    );
+  };
 };
