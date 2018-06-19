@@ -10,77 +10,77 @@ firebase.initializeApp(firebaseConfig);
 export default class Main extends Component {
   constructor(props) {
     super(props);
-		this.state = this.getInitialState();
+    this.state = this.getInitialState();
 
-		this.startSession = this.startSession.bind(this);
-		this.toggleStar = this.toggleStar.bind(this);
-	}
+    this.startSession = this.startSession.bind(this);
+    this.toggleStar = this.toggleStar.bind(this);
+  }
 
-	getInitialState() {
-		return ({
-			housing: [],
-			filterFavorites: false,
-			starredListings: [],
-			username: "",
-			view: "home",
-		});
-	};
+  getInitialState() {
+    return ({
+      housing: [],
+      filterFavorites: false,
+      starredListings: [],
+      username: "",
+      view: "home",
+    });
+  };
 
-	componentDidMount() {
-		axios({
-		  method:'get',
-		  url:"https://api.simplyrets.com/openhouses",
-			auth: {
-				username: "simplyrets",
-			  password: "simplyrets",
-			},
-		}).then((response) => {
-			this.setState({
-				housing: response.data,
-			});
-		})
-	};
+  componentDidMount() {
+    axios({
+      method:'get',
+      url:"https://api.simplyrets.com/openhouses",
+      auth: {
+        username: "simplyrets",
+        password: "simplyrets",
+      },
+    }).then((response) => {
+      this.setState({
+        housing: response.data,
+      });
+    })
+  };
 
   startSession(name) {
     const ref = firebase.database().ref(name);
 
-		// A new userId is a random six digit number
-		let userId = Math.floor(Math.random() * 1000000);
+    // A new userId is a random six digit number
+    let userId = Math.floor(Math.random() * 1000000);
 
-		ref.once("value", snapshot => {
-			const data = snapshot.val();
-			const starredListings = [];
+    ref.once("value", snapshot => {
+      const data = snapshot.val();
+      const starredListings = [];
 
-			if (snapshot.exists()) {
-				for (let key in data) {
-					if (data[key]["userId"]) {
-						// If a user already exists, their userId replaces the random number
-						userId = data[key]["userId"];
-					} else {
-						// The user's "starred" listings are added to state for easy manipulation
-						starredListings.push(data[key]["starredListing"]);
-					}
-				}
-			} else {
-				// A new ref is created with the name and userId
-				ref.push({
-					userId,
-				});
-			}
+      if (snapshot.exists()) {
+        for (let key in data) {
+          if (data[key]["userId"]) {
+            // If a user already exists, their userId replaces the random number
+            userId = data[key]["userId"];
+          } else {
+            // The user's "starred" listings are added to state for easy manipulation
+            starredListings.push(data[key]["starredListing"]);
+          }
+        }
+      } else {
+        // A new ref is created with the name and userId
+        ref.push({
+	        userId,
+        });
+      }
       // The userId is saved to browser localstorage
       window.localStorage.setItem("userId", userId);
 
-			return this.setState({
-				starredListings,
-				view: "listings",
-			});
-		});
-	}
+      return this.setState({
+        starredListings,
+        view: "listings",
+      });
+    });
+  }
 
-	toggleStar(listingId) {
-		const updatedStarredListings = [...this.state.starredListings];
-		const ref = firebase.database().ref(`${this.state.username}`);
-		let listingKey;
+  toggleStar(listingId) {
+    const updatedStarredListings = [...this.state.starredListings];
+    const ref = firebase.database().ref(`${this.state.username}`);
+    let listingKey;
 
 		new Promise(() => {
 			ref.once("value", snapshot => {
